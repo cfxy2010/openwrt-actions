@@ -37,11 +37,12 @@ jobs:
       run: |
         git clone https://github.com/openwrt/openwrt.git -b openwrt-21.02  openwrt
 
-    - name: Load custom feeds and packages
+    - name: Load custom feeds,packages,config
       run: |
         chmod +x add_feeds.sh
         chmod +x add_packages.sh
-        cd openwrt
+        cp .config.openwrt openwrt/.config
+        chmod +x configure.sh 
 
     - name: Update - openwrt source update and install 
       run: |
@@ -51,8 +52,6 @@ jobs:
 
     - name: Config - official openwrt xiaomi_R3G build config
       run: |
-        cp ../.config.openwrt openwrt/.config
-        chmod +x ../configure.sh
         cd openwrt
         make defconfig
 
