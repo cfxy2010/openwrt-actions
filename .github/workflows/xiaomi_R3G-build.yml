@@ -37,11 +37,10 @@ jobs:
 
     - name: Load custom feeds and packages
       run: |
-        mv add_feeds.sh openwrt/feeds.conf.default
+        cd openwrt
         chmod +x add_feeds.sh
         chmod +x add_packages.sh
-        cd openwrt
-        
+
     - name: Update - openwrt source update and install 
       run: |
         cd openwrt
