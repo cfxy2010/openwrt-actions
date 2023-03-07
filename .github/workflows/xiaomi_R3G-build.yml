@@ -1,10 +1,11 @@
 name: OpenWrt_xiaomi_R3G
 on:
-#   schedule:
-#     - cron:  0 7 * * 5
+  # schedule:
+  #   - cron:  0 7 * * 5
   push:
     branches:
       - master
+      - openwrt-21.02
     paths:
       - '.config.openwrt'
       - '.github/workflows/xiaomi_R3G-build.yml'
@@ -32,6 +33,13 @@ jobs:
     - name: Download - openwrt source download
       run: |
         git clone https://github.com/openwrt/openwrt.git -b openwrt-21.02
+
+    - name: Load custom feeds and packages
+      run: |
+        mv add_feeds.sh openwrt/feeds.conf.default
+        chmod +x add_feeds.sh
+        chmod +x add_packages.sh
+        cd openwrt
         
     - name: Update - openwrt source update and install 
       run: |
@@ -42,13 +50,14 @@ jobs:
     - name: Config - official openwrt xiaomi_R3G build config
       run: |
         cp .config.openwrt openwrt/.config
+        chmod +x configure.sh
         cd openwrt
         make defconfig
 
     - name: Download - openwrt build dependencies
       run: |
         cd openwrt
-        make download -j8
+        make download -j$(nproc)
 
     - name: Build - make openwrt source
       run: |
