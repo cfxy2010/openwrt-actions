@@ -1,5 +1,6 @@
 name: OpenWrt_xiaomi_R3G
 on:
+  workflow_dispatch:
   # schedule:
   #   - cron:  0 7 * * 5
   push:
