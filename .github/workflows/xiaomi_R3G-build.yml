@@ -31,7 +31,7 @@ jobs:
 
     - name: Download - openwrt source download
       run: |
-        git clone -b openwrt-21.02.5 https://github.com/openwrt/openwrt.git
+        git clone https://github.com/openwrt/openwrt.git -b openwrt-21.02
         
     - name: Update - openwrt source update and install 
       run: |
