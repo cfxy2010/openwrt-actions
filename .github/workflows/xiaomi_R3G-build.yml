@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - master
-      - openwrt-21.02
     paths:
       - '.config.openwrt'
       - '.github/workflows/xiaomi_R3G-build.yml'
