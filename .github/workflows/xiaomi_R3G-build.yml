@@ -39,6 +39,7 @@ jobs:
 
     - name: Load custom feeds,packages,config
       run: |
+        ls
         chmod +x add_feeds.sh
         chmod +x add_packages.sh
         cp .config.openwrt openwrt/.config
